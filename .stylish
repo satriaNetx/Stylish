@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+clear
+Black='\e[1;30m'       # Black
+Red='\e[1;31m'         # Red
+Green='\e[1;32m'       # Green
+Yellow='\e[1;33m'      # Yellow
+Blue='\e[1;34m'        # Blue
+Purple='\e[1;35m'      # Purple
+Cyan='\e[1;36m'        # Cyan
+White='\e[1;37m'       # White
+
+echo -e "
+     ${Red}╔══╗╔══╗╔═╦╗╔╗─╔══╗╔══╗╔╗╔╗
+     ${Blue}║══╣╚╗╔╝╚╗║║║║─╚║║╝║══╣║╚╝║
+     ${Blue}╠══║─║║─╔╩╗║║╚╗╔║║╗╠══║║╔╗║
+     ${White}╚══╝─╚╝─╚══╝╚═╝╚══╝╚══╝╚╝╚╝"
+echo
+echo -e "${Red} [1]${Cyan} Softkeys    ${White}#setup keys termux=0.65"
+echo -e "${Red} [2]${Cyan} Colors      ${White}#Termux colors"
+echo -e "${Red} [3]${Cyan} Fonts       ${White}#Termux fonts"
+echo -e "${Red} [4]\e[1;36m Exit"
+echo
+echo -n -e "${Red} enter nomor >>${White} "
+read nomor
+
+if [ $nomor = "1" ];
+then
+  softkeys=$HOME/.termux/termux.properties
+  cat > $softkeys <<- EOM
+  extra-keys = [['ESC','/','-','HOME','UP','END','PGUP'],['TAB','CTRL','ALT','LEFT','DOWN','RIGHT','PGDN']]
+EOM
+termux-reload-settings
+
+elif [ $nomor = "2" ];
+then
+bash /data/data/com.termux/files/usr/share/Stylish/.colors
+
+elif [ $nomor  = "3" ];
+then
+bash /data/data/com.termux/files/usr/share/Stylish/.fonts
+
+elif [ $nomor = "4" ];
+then
+exit
+
+else
+clear
+echo -e "\033[1;31m[!] Wrong Input...\033[1;0m"
+sleep 1
+cd ../
+fi
